@@ -1,6 +1,5 @@
 #include "check.h"
 #include "dgemm_avx256.h"
-#include "dgemm_avx512.h"
 #include "dgemm_unrolled.h"
 #include "dgemm_blocked.h"
 #include "dgemm_basic.h"
@@ -50,7 +49,6 @@ void check()
     {
         {dgemm_basic_blocked, "dgemm_basic_blocked"},
         {dgemm_avx256, "dgemm_avx256"},
-        {dgemm_avx512, "dgemm_avx512"},
         {dgemm_unrolled, "dgemm_unrolled"},
         {dgemm_blocked, "dgemm_blocked"},
     };
