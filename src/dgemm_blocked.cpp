@@ -12,14 +12,14 @@ static void do_block(const uint32_t n, const uint32_t si, const uint32_t sj, con
 {
     constexpr uint32_t UNROLL = 4;
 
-    for( uint32_t i = si; i < si + BLOCKSIZE; i += UNROLL * 8)
+    for( uint32_t i = si; i < si + BLOCKSIZE; i += UNROLL * 4)
     {
         for( uint32_t j = sj; j < sj + BLOCKSIZE; ++j)
         {
             __m256d c[UNROLL];
             for( uint32_t r = 0; r < UNROLL; r++)
             {
-                c[r] = _mm256_load_pd(C + i + r * 8 + j * n); //[ UNROLL];
+                c[r] = _mm256_load_pd(C + i + r * 4 + j * n); //[ UNROLL];
             }
 
             for( uint32_t k = sk; k < sk + BLOCKSIZE; k++ )
@@ -27,12 +27,12 @@ static void do_block(const uint32_t n, const uint32_t si, const uint32_t sj, con
                 __m256d bb = _mm256_broadcastsd_pd(_mm_load_sd(B + j * n + k));
                 for( uint32_t r = 0; r < UNROLL; r++)
                 {
-                    c[r] = _mm256_fmadd_pd(_mm256_load_pd(A + n * k + r * 8 + i), bb, c[r]);
+                    c[r] = _mm256_fmadd_pd(_mm256_load_pd(A + n * k + r * 4 + i), bb, c[r]);
                 }
             }
             for( uint32_t r = 0; r < UNROLL; r++)
             {
-                _mm256_store_pd(C + i + r * 8 + j * n, c[r]);
+                _mm256_store_pd(C + i + r * 4 + j * n, c[r]);
             }
         }
     }
