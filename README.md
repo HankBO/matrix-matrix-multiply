@@ -1,3 +1,16 @@
+
+# Course Project: Hardware for Deep Learning: An investigation for Current Options
+
+## Benchmark Test 1
+
+![](images/Benchmark%20Test1.png)
+
+## Benchmark Test 2
+
+![](images/Benchmark%20Test2.png)
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
 # Algorithms for matrix matrix multiplication, dgemm
 
 The algorithms are taken form the books:
